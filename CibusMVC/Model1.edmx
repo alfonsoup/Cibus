@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CibusDB2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ComboRestaurante">
+          <Key>
+            <PropertyRef Name="IdComboRestaurante" />
+          </Key>
+          <Property Name="IdComboRestaurante" Type="int" Nullable="false" />
+          <Property Name="IdRestaurante" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="128" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Imagen" Type="nchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="DetallePedido">
+          <Key>
+            <PropertyRef Name="IdDetallePedido" />
+          </Key>
+          <Property Name="IdDetallePedido" Type="int" Nullable="false" />
+          <Property Name="IdComboRestaurante" Type="int" Nullable="false" />
+          <Property Name="IdPedido" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="IdSize" Type="int" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="IdPedido" />
+          </Key>
+          <Property Name="IdPedido" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Restaurante">
+          <Key>
+            <PropertyRef Name="IdRestaurante" />
+          </Key>
+          <Property Name="IdRestaurante" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="32" />
+          <Property Name="Telefono" Type="nchar" MaxLength="16" />
+          <Property Name="Logo" Type="nchar" MaxLength="128" />
+          <Property Name="Tipo" Type="nchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="IdSize" />
+          </Key>
+          <Property Name="IdSize" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="32" />
+          <Property Name="Password" Type="nchar" MaxLength="32" />
+          <Property Name="IdRestaurante" Type="int" />
+          <Property Name="IsAdmin" Type="bit" />
+        </EntityType>
+        <Association Name="FK_ComboRestaurante_Restaurante">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="ComboRestaurante" Type="Self.ComboRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Principal>
+            <Dependent Role="ComboRestaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePedido_ComboRestaurante">
+          <End Role="ComboRestaurante" Type="Self.ComboRestaurante" Multiplicity="1" />
+          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComboRestaurante">
+              <PropertyRef Name="IdComboRestaurante" />
+            </Principal>
+            <Dependent Role="DetallePedido">
+              <PropertyRef Name="IdComboRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePedido_Pedido">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1" />
+          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="IdPedido" />
+            </Principal>
+            <Dependent Role="DetallePedido">
+              <PropertyRef Name="IdPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePedido_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="1" />
+          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="IdSize" />
+            </Principal>
+            <Dependent Role="DetallePedido">
+              <PropertyRef Name="IdSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Restaurante">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CibusDB2ModelStoreContainer">
+          <EntitySet Name="ComboRestaurante" EntityType="Self.ComboRestaurante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurante" EntityType="Self.Restaurante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ComboRestaurante_Restaurante" Association="Self.FK_ComboRestaurante_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="ComboRestaurante" EntitySet="ComboRestaurante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePedido_ComboRestaurante" Association="Self.FK_DetallePedido_ComboRestaurante">
+            <End Role="ComboRestaurante" EntitySet="ComboRestaurante" />
+            <End Role="DetallePedido" EntitySet="DetallePedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePedido_Pedido" Association="Self.FK_DetallePedido_Pedido">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="DetallePedido" EntitySet="DetallePedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePedido_Size" Association="Self.FK_DetallePedido_Size">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="DetallePedido" EntitySet="DetallePedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Restaurante" Association="Self.FK_Usuario_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurante" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CibusDB2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ComboRestaurante">
+          <Key>
+            <PropertyRef Name="IdComboRestaurante" />
+          </Key>
+          <Property Name="IdComboRestaurante" Type="Int32" Nullable="false" />
+          <Property Name="IdRestaurante" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Imagen" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.FK_ComboRestaurante_Restaurante" FromRole="ComboRestaurante" ToRole="Restaurante" />
+          <NavigationProperty Name="DetallePedidoes" Relationship="Self.FK_DetallePedido_ComboRestaurante" FromRole="ComboRestaurante" ToRole="DetallePedido" />
+        </EntityType>
+        <EntityType Name="DetallePedido">
+          <Key>
+            <PropertyRef Name="IdDetallePedido" />
+          </Key>
+          <Property Name="IdDetallePedido" Type="Int32" Nullable="false" />
+          <Property Name="IdComboRestaurante" Type="Int32" Nullable="false" />
+          <Property Name="IdPedido" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="IdSize" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="ComboRestaurante" Relationship="Self.FK_DetallePedido_ComboRestaurante" FromRole="DetallePedido" ToRole="ComboRestaurante" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK_DetallePedido_Pedido" FromRole="DetallePedido" ToRole="Pedido" />
+          <NavigationProperty Name="Size" Relationship="Self.FK_DetallePedido_Size" FromRole="DetallePedido" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="IdPedido" />
+          </Key>
+          <Property Name="IdPedido" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="DetallePedidoes" Relationship="Self.FK_DetallePedido_Pedido" FromRole="Pedido" ToRole="DetallePedido" />
+        </EntityType>
+        <EntityType Name="Restaurante">
+          <Key>
+            <PropertyRef Name="IdRestaurante" />
+          </Key>
+          <Property Name="IdRestaurante" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
+          <Property Name="Tipo" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ComboRestaurantes" Relationship="Self.FK_ComboRestaurante_Restaurante" FromRole="Restaurante" ToRole="ComboRestaurante" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Restaurante" FromRole="Restaurante" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="IdSize" />
+          </Key>
+          <Property Name="IdSize" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="DetallePedidoes" Relationship="Self.FK_DetallePedido_Size" FromRole="Size" ToRole="DetallePedido" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="32" FixedLength="true" Unicode="true" />
+          <Property Name="IdRestaurante" Type="Int32" />
+          <Property Name="IsAdmin" Type="Boolean" />
+          <NavigationProperty Name="Restaurante" Relationship="Self.FK_Usuario_Restaurante" FromRole="Usuario" ToRole="Restaurante" />
+        </EntityType>
+        <Association Name="FK_ComboRestaurante_Restaurante">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="1" />
+          <End Role="ComboRestaurante" Type="Self.ComboRestaurante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Principal>
+            <Dependent Role="ComboRestaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePedido_ComboRestaurante">
+          <End Role="ComboRestaurante" Type="Self.ComboRestaurante" Multiplicity="1" />
+          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComboRestaurante">
+              <PropertyRef Name="IdComboRestaurante" />
+            </Principal>
+            <Dependent Role="DetallePedido">
+              <PropertyRef Name="IdComboRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePedido_Pedido">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1" />
+          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="IdPedido" />
+            </Principal>
+            <Dependent Role="DetallePedido">
+              <PropertyRef Name="IdPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePedido_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="1" />
+          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="IdSize" />
+            </Principal>
+            <Dependent Role="DetallePedido">
+              <PropertyRef Name="IdSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Restaurante">
+          <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurante">
+              <PropertyRef Name="IdRestaurante" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRestaurante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CibusDB2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ComboRestaurantes" EntityType="Self.ComboRestaurante" />
+          <EntitySet Name="DetallePedidoes" EntityType="Self.DetallePedido" />
+          <EntitySet Name="Pedidoes" EntityType="Self.Pedido" />
+          <EntitySet Name="Restaurantes" EntityType="Self.Restaurante" />
+          <EntitySet Name="Sizes" EntityType="Self.Size" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_ComboRestaurante_Restaurante" Association="Self.FK_ComboRestaurante_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurantes" />
+            <End Role="ComboRestaurante" EntitySet="ComboRestaurantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePedido_ComboRestaurante" Association="Self.FK_DetallePedido_ComboRestaurante">
+            <End Role="ComboRestaurante" EntitySet="ComboRestaurantes" />
+            <End Role="DetallePedido" EntitySet="DetallePedidoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePedido_Pedido" Association="Self.FK_DetallePedido_Pedido">
+            <End Role="Pedido" EntitySet="Pedidoes" />
+            <End Role="DetallePedido" EntitySet="DetallePedidoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePedido_Size" Association="Self.FK_DetallePedido_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="DetallePedido" EntitySet="DetallePedidoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Restaurante" Association="Self.FK_Usuario_Restaurante">
+            <End Role="Restaurante" EntitySet="Restaurantes" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CibusDB2ModelStoreContainer" CdmEntityContainer="CibusDB2Entities">
+          <EntitySetMapping Name="ComboRestaurantes">
+            <EntityTypeMapping TypeName="CibusDB2Model.ComboRestaurante">
+              <MappingFragment StoreEntitySet="ComboRestaurante">
+                <ScalarProperty Name="IdComboRestaurante" ColumnName="IdComboRestaurante" />
+                <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallePedidoes">
+            <EntityTypeMapping TypeName="CibusDB2Model.DetallePedido">
+              <MappingFragment StoreEntitySet="DetallePedido">
+                <ScalarProperty Name="IdDetallePedido" ColumnName="IdDetallePedido" />
+                <ScalarProperty Name="IdComboRestaurante" ColumnName="IdComboRestaurante" />
+                <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdSize" ColumnName="IdSize" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidoes">
+            <EntityTypeMapping TypeName="CibusDB2Model.Pedido">
+              <MappingFragment StoreEntitySet="Pedido">
+                <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurantes">
+            <EntityTypeMapping TypeName="CibusDB2Model.Restaurante">
+              <MappingFragment StoreEntitySet="Restaurante">
+                <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="CibusDB2Model.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="IdSize" ColumnName="IdSize" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CibusDB2Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="CibusDB2Model.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

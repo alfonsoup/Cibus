@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CibusMVC.Models.Restaurante>
+﻿@model IEnumerable<CibusMVC.Restaurante>
 
 @{
     ViewBag.Title = "Restaurantes";
@@ -38,7 +38,7 @@
                         <div class="grid-item @Html.Encode(item.Tipo) col-lg-3 col-md-4 col-sm-6 nopadding">
                             <div class="item-wrap">
                                 <figure  class="effect-goliath">
-                                    <img src="@Url.Content(item.logosrc)" class="img-responsive" alt="img11" />
+                                    <img src="@Url.Content(item.Logo)" class="img-responsive" alt="img11" />
                                     <figcaption>
                                         <div class="fig-description">
                                             <h3>@Html.DisplayFor(modelItem => item.Nombre)</h3>
@@ -47,7 +47,7 @@
                                         </div>
 
 
-                                        <a href='@Url.Action("Index","Comboes",new { id=item.IdMenu})'>Ver Mas</a>
+                                        <a href='@Url.Action("Index","Comboes",new { id=item.IdRestaurante})'>Ver Mas</a>
                                     </figcaption>
                                 </figure>
                             </div>
