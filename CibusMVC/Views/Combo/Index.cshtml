@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CibusMVC.ComboRestaurante>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+<h2>Index</h2>
+
+@Html.AntiForgeryToken()
+
+<section id="blog" class="padding-side-50">
+    <div class="e-divider-8"></div>
+    <div class="e-divider-4"></div>
+    <div class="grid container-fluid e-text-center">
+        <div class="item-wrap">
+            <figure class="effect-goliath">
+                <img src="@Url.Content(Model.Cast<ComboRestaurante>().First().Restaurante.Logo)" class="img-responsive" alt="img11" />
+
+            </figure>
+            <h3>@Html.DisplayFor(modelItem => Model.Cast<ComboRestaurante>().First().Restaurante.Nombre)</h3>
+        </div>
+
+
+        <div id="posts" class="row popup-container">
+
+            @foreach (var item in Model)
+
+            {
+                <div class="grid-item grid-sizer branding design @*col-md-4*@ col-sm-6">
+                    <div class="item-wrap">
+                        <figure id="@Html.DisplayFor(modelItem => item.IdComboRestaurante)" class="">
+
+                            <img src="@Url.Content(item.Imagen)" style="width: 300px; height:350px" alt="img11" />
+                            <figcaption>
+
+                                @*<div class="post-header">
+                                    <h5>@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                                </div>*@
+                                <div class="post-entry">
+                                    <p>@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                                </div>
+                                <div class="post-tag pull-right">
+                                    <span>RD$@Html.DisplayFor(modelItem => item.Precio)</span>
+                                    <form class="pull-left" >
+                                        Cantidad:
+                                        <input type="number" name="quantity" min="1" >
+                                    </form>
+                                    <button>Seleccionar</button>
+
+                                </div>
+
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</section>

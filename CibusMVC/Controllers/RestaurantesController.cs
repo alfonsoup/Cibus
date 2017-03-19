@@ -13,19 +13,32 @@ namespace CibusMVC.Controllers
 {
     public class RestaurantesController : Controller
     {
-        private UnitOfWork unitOfWork = new UnitOfWork();
+
+
+        
+        private IRestauranteRepository restauranteRepository;
+        public RestaurantesController()
+        {
+            this.restauranteRepository = new RestauranteRepository(new CibusDB2Entities());
+        }
+
+        public  RestaurantesController(IRestauranteRepository restauranteRepository)
+        {
+            this.restauranteRepository = restauranteRepository;
+        }
+
 
         // GET: Restaurantes
         public ActionResult Index()
         {
-            var restaurantes = unitOfWork.RestauranteRepository.Get();
+            var restaurantes = from s in restauranteRepository.GetRestaurantes() select s;
             return View(restaurantes);
         }
-        protected override void Dispose(bool disposing)
-        {
-            unitOfWork.Dispose();
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    unitOfWork.Dispose();
+        //    base.Dispose(disposing);
+        //}
 
         //// GET: Restaurantes/Details/5
         //public ActionResult Details(int? id)

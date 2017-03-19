@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CibusDB2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CibusDB2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ComboRestaurante">
           <Key>
             <PropertyRef Name="IdComboRestaurante" />
           </Key>
-          <Property Name="IdComboRestaurante" Type="int" Nullable="false" />
+          <Property Name="IdComboRestaurante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRestaurante" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="64" />
           <Property Name="Descripcion" Type="nchar" MaxLength="128" />
           <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Imagen" Type="nchar" MaxLength="128" />
@@ -19,7 +20,7 @@
           <Key>
             <PropertyRef Name="IdDetallePedido" />
           </Key>
-          <Property Name="IdDetallePedido" Type="int" Nullable="false" />
+          <Property Name="IdDetallePedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdComboRestaurante" Type="int" Nullable="false" />
           <Property Name="IdPedido" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
@@ -39,7 +40,7 @@
           <Key>
             <PropertyRef Name="IdRestaurante" />
           </Key>
-          <Property Name="IdRestaurante" Type="int" Nullable="false" />
+          <Property Name="IdRestaurante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nchar" MaxLength="32" />
           <Property Name="Telefono" Type="nchar" MaxLength="16" />
           <Property Name="Logo" Type="nchar" MaxLength="128" />
@@ -49,7 +50,7 @@
           <Key>
             <PropertyRef Name="IdSize" />
           </Key>
-          <Property Name="IdSize" Type="int" Nullable="false" />
+          <Property Name="IdSize" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -66,7 +67,7 @@
           <Key>
             <PropertyRef Name="IdUsuario" />
           </Key>
-          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nchar" MaxLength="32" />
           <Property Name="Password" Type="nchar" MaxLength="32" />
           <Property Name="IdRestaurante" Type="int" />
@@ -161,8 +162,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CibusDB2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -177,6 +177,7 @@
           <Property Name="Imagen" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Restaurante" Relationship="Self.FK_ComboRestaurante_Restaurante" FromRole="ComboRestaurante" ToRole="Restaurante" />
           <NavigationProperty Name="DetallePedidoes" Relationship="Self.FK_DetallePedido_ComboRestaurante" FromRole="ComboRestaurante" ToRole="DetallePedido" />
+          <Property Name="Nombre" Type="String" MaxLength="64" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="DetallePedido">
           <Key>
@@ -341,6 +342,7 @@
           <EntitySetMapping Name="ComboRestaurantes">
             <EntityTypeMapping TypeName="CibusDB2Model.ComboRestaurante">
               <MappingFragment StoreEntitySet="ComboRestaurante">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdComboRestaurante" ColumnName="IdComboRestaurante" />
                 <ScalarProperty Name="IdRestaurante" ColumnName="IdRestaurante" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
