@@ -268,7 +268,7 @@
     <Content Include="App_Data\CibusDB_log.ldf">
       <DependentUpon>CibusDB.mdf</DependentUpon>
     </Content>
-    <Content Include="assets\custom\css\Login.css" />
+    <Content Include="assets\custom\css login\Login.css" />
     <Content Include="assets\custom\css\plugin.css" />
     <Content Include="assets\custom\css\style.css" />
     <Content Include="assets\custom\images\Combo\BK\HamDobleQueso.png" />
