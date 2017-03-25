@@ -17,7 +17,7 @@ namespace CibusMVC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pedido()
         {
-            this.DetallePedidoes = new HashSet<DetallePedido>();
+            this.DetallePedidos = new HashSet<DetallePedido>();
         }
     
         public int IdPedido { get; set; }
@@ -26,6 +26,6 @@ namespace CibusMVC
         public Nullable<decimal> Total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallePedido> DetallePedidoes { get; set; }
+        public virtual ICollection<DetallePedido> DetallePedidos { get; set; }
     }
 }

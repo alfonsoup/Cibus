@@ -17,18 +17,21 @@ namespace CibusMVC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ComboRestaurante()
         {
-            this.DetallePedidoes = new HashSet<DetallePedido>();
+            this.DetallePedidos = new HashSet<DetallePedido>();
+            this.Carts = new HashSet<Cart>();
         }
     
         public int IdComboRestaurante { get; set; }
         public int IdRestaurante { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<decimal> Precio { get; set; }
+        public decimal Precio { get; set; }
         public string Imagen { get; set; }
         public string Nombre { get; set; }
     
         public virtual Restaurante Restaurante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallePedido> DetallePedidoes { get; set; }
+        public virtual ICollection<DetallePedido> DetallePedidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
     }
 }
