@@ -8,6 +8,7 @@ namespace CibusMVC.DAL
     public interface IRestauranteRepository : IDisposable
     {
         IEnumerable<Restaurante> GetRestaurantes();
+        IEnumerable<Restaurante> GetRestaurantesByTipo(string tipo);
         Restaurante GetRestauranteByID(int restauranteId);
         void InsertRestaurante(Restaurante restaurante);
         void DeleteRestaurante(int restauranteID);

@@ -29,9 +29,22 @@ namespace CibusMVC.Controllers
 
 
         // GET: Restaurantes
-        public ActionResult Index()
+        public ActionResult Index(String tipo)
         {
-            var restaurantes = from s in restauranteRepository.GetRestaurantes() select s;
+
+            IEnumerable<Restaurante> restaurantes;
+
+
+            if (String.IsNullOrEmpty(tipo))
+            {
+                restaurantes = from s in restauranteRepository.GetRestaurantes() select s;
+            }
+            else {
+                restaurantes = from s in restauranteRepository.GetRestaurantesByTipo(tipo) select s;
+
+            }
+
+           
             return View(restaurantes);
         }
         //protected override void Dispose(bool disposing)

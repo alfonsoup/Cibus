@@ -66,5 +66,14 @@ namespace CibusMVC.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public IEnumerable<Restaurante> GetRestaurantesByTipo(string tipo)
+        {
+            var rest = from b in context.Restaurantes
+                        where b.Tipo.Equals(tipo)
+                        select b;
+
+            return rest;
+        }
     }
 }

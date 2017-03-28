@@ -17,19 +17,17 @@
    
     <div  id="filters" class="port-filter text-right grid-item">
         <ul>
-            <li><a href="#cat1" data-filter="*">Todos</a></li>
-            <li><a href="#cat2" data-filter=".Pizza">Pizzas</a></li>
-            <li><a href="#cat3" data-filter=".Burger">Hamburguesas</a></li>
-            <li><a href="#cat4" data-filter=".Otros">Otros</a></li>
+            <li><a href="@Url.Action("Index","Restaurantes")">Todos</a></li>
+            <li><a href="@Url.Action("Index","Restaurantes", new { tipo = "Pizza"})" >Pizzas</a></li>
+            <li><a href="@Url.Action("Index","Restaurantes", new {tipo="burguer" })">Hamburguesas</a></li>
+            <li><a href="@Url.Action("Index","Restaurantes", new { tipo="otros"})">Otros</a></li>
            
         </ul>
        
     </div>
-    @using (Html.BeginForm("index", "ShoppingCart"))
-    { <button  type="button" class="btn btn-default" aria-label="Center Align">
-        <span  class="glyphicon glyphicon-shopping-cart text-right grid-item" aria-hidden="true"></span>
-        
-    </button>}
+    <a href="@Url.Action("Index", "ShoppingCart")">
+    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+    </a>
     <br />
 
 </div>
