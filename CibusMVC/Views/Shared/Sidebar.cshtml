@@ -25,9 +25,11 @@
         </ul>
        
     </div>
-    <button type="button" class="btn btn-default" aria-label="Center Align">
-        <span class="glyphicon glyphicon-shopping-cart text-right grid-item" aria-hidden="true"></span>
-    </button>
+    @using (Html.BeginForm("index", "ShoppingCart"))
+    { <button  type="button" class="btn btn-default" aria-label="Center Align">
+        <span  class="glyphicon glyphicon-shopping-cart text-right grid-item" aria-hidden="true"></span>
+        
+    </button>}
     <br />
 
 </div>

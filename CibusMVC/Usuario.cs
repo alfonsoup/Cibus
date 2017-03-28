@@ -17,8 +17,8 @@ namespace CibusMVC
         public int IdUsuario { get; set; }
         public string Nombre { get; set; }
         public string Password { get; set; }
-        public Nullable<int> IdRestaurante { get; set; }
-        public Nullable<bool> IsAdmin { get; set; }
+        public int IdRestaurante { get; set; }
+        public bool IsAdmin { get; set; }
     
         public virtual Restaurante Restaurante { get; set; }
     }

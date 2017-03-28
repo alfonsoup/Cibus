@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,6 +47,7 @@ namespace CibusMVC.Models
                     CartId = ShoppingCartId,
                     Cantidad = 1,
                     FechaCreacion = DateTime.Now
+                    //,RecordId = null
                 };
                 db.Carts.Add(cartItem);
             }
@@ -55,8 +57,36 @@ namespace CibusMVC.Models
                 // then add one to the quantity
                 cartItem.Cantidad++;
             }
-            // Save changes
-            db.SaveChanges();
+
+
+
+            try
+            {
+                // Your code...
+                // Could also be before try if you know the exception occurs in SaveChanges
+
+
+                // Save changes
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+
+
+
+            
         }
 
         public int RemoveFromCart(int id)

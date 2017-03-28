@@ -17,15 +17,15 @@ namespace CibusMVC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pedido()
         {
-            this.DetallePedidos = new HashSet<DetallePedido>();
+            this.DetallePedido = new HashSet<DetallePedido>();
         }
     
         public int IdPedido { get; set; }
         public int IdCliente { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public decimal Total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallePedido> DetallePedidos { get; set; }
+        public virtual ICollection<DetallePedido> DetallePedido { get; set; }
     }
 }

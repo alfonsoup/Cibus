@@ -17,8 +17,8 @@ namespace CibusMVC
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Restaurante()
         {
-            this.ComboRestaurantes = new HashSet<ComboRestaurante>();
-            this.Usuarios = new HashSet<Usuario>();
+            this.ComboRestaurante = new HashSet<ComboRestaurante>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public int IdRestaurante { get; set; }
@@ -28,8 +28,8 @@ namespace CibusMVC
         public string Tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ComboRestaurante> ComboRestaurantes { get; set; }
+        public virtual ICollection<ComboRestaurante> ComboRestaurante { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }
