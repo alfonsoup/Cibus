@@ -27,6 +27,12 @@ namespace CibusMVC.Controllers
             var detalle = from s in detallePedidoRepository.GetDetallePedidos() select s;
             return View(detalle);
         }
+
+     //   public ActionResult AddPedido(int idComboRestaurante, )
+       // {
+
+        //}
+         
         
     }
 }
