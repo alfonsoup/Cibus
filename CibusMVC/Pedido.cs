@@ -21,9 +21,9 @@ namespace CibusMVC
         }
     
         public int IdPedido { get; set; }
-        public int IdCliente { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public decimal Total { get; set; }
+        public string IdCliente { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<decimal> Total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }

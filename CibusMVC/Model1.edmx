@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CibusDB2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CibusDB2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="RecordId" />
@@ -41,8 +41,8 @@
           <Key>
             <PropertyRef Name="IdPedido" />
           </Key>
-          <Property Name="IdPedido" Type="int" Nullable="false" />
-          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="IdPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="nchar" MaxLength="16" Nullable="false" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
@@ -189,8 +189,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CibusDB2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -238,7 +237,7 @@
             <PropertyRef Name="IdPedido" />
           </Key>
           <Property Name="IdPedido" Type="Int32" Nullable="false" />
-          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="String" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="DetallePedido" Relationship="Self.FK_DetallePedido_Pedido" FromRole="Pedido" ToRole="DetallePedido" />
