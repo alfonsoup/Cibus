@@ -14,8 +14,13 @@ namespace CibusMVC.Controllers
         // GET: Checkout/Confirmar
         public ActionResult Confirmar()
         {
+            string ip =null ;
             var pedido = new Pedido();
-            pedido.IdCliente = HttpContext.Request.ServerVariables["REMOTE_ADDR"]; //HttpContext.Request.UserHostAddress;
+            ip = HttpContext.Request.ServerVariables["REMOTE_ADDR"];
+
+            ip=ip.Remove(0,7);
+           
+            pedido.IdCliente = ip; //HttpContext.Request.UserHostAddress;
             pedido.Fecha = DateTime.Now;
 
             db.Pedidos.Add(pedido);
@@ -30,14 +35,19 @@ namespace CibusMVC.Controllers
 
         public ActionResult Completado(int id)
         {
+            string ip = null;
+            var pedido = new Pedido();
+             ip = HttpContext.Request.ServerVariables["REMOTE_ADDR"];
+            ip=ip.Remove(0, 7);
             // Validate customer owns this order
             bool isValid = db.Pedidos.Any(
                 o => o.IdPedido == id &&
-                o.IdCliente == HttpContext.Request.ServerVariables["REMOTE_ADDR"]);
+                o.IdCliente == ip);
 
             if (isValid)
             {
-                return View(id);
+                var o = db.Pedidos.First(asd => asd.IdPedido == id);
+                return View(o);
             }
             else
             {

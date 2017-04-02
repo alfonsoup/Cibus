@@ -22,6 +22,11 @@
     <!-- CSS -->
     @Styles.Render("~/bundles/css")
 
+ 
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    @RenderSection("scripts", required: false)
 
 </head>
 <body class="">
@@ -32,7 +37,7 @@
 
     <div id="wrapper" class="">
 
-        <a href="#menu-toggle" class="" id="menu-toggle"><span class="" aria-hidden="true"></span></a>
+        @*<a href="#menu-toggle" class="" id="menu-toggle"><span class="" aria-hidden="true"></span></a>*@
 
         <!-- Sidebar -->
 

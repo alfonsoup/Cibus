@@ -204,6 +204,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministradorComboRestaurantesController.cs" />
+    <Compile Include="Controllers\AdministradorRestauranteController.cs" />
+    <Compile Include="Controllers\AdministradorUsuarioController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ComboController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -218,11 +221,9 @@
     <Compile Include="DAL\IDetallePedidoRepository.cs" />
     <Compile Include="DAL\IPedidoRepository.cs" />
     <Compile Include="DAL\IRestauranteRepository.cs" />
-    <Compile Include="DAL\ISizeRepository.cs" />
     <Compile Include="DAL\IUsuarioRepository.cs" />
     <Compile Include="DAL\PedidoRepository.cs" />
     <Compile Include="DAL\RestauranteRepository.cs" />
-    <Compile Include="DAL\SizeRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="DAL\UsuarioRepository.cs" />
     <Compile Include="DetallePedido.cs">
@@ -257,9 +258,6 @@
     <Compile Include="Restaurante.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Size.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -278,6 +276,8 @@
     <Content Include="assets\custom\css login\Login.css" />
     <Content Include="assets\custom\css\plugin.css" />
     <Content Include="assets\custom\css\style.css" />
+    <Content Include="assets\custom\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\custom\fonts\Pe-icon-7-stroke.svg" />
     <Content Include="assets\custom\images\Combo\BK\HamDobleQueso.png" />
     <Content Include="assets\custom\images\Combo\BK\KPollo.png" />
     <Content Include="assets\custom\images\Combo\BK\StckDoble.png" />
@@ -327,6 +327,7 @@
     <Content Include="assets\custom\images\Combo\W\POLLO.png" />
     <Content Include="assets\custom\images\Combo\W\WRAP.png" />
     <Content Include="assets\custom\images\construcion.png" />
+    <Content Include="assets\custom\images\default-user.png" />
     <Content Include="assets\custom\images\logo01.png" />
     <Content Include="assets\custom\images\portfolio\thumbs\BK.png" />
     <Content Include="assets\custom\images\portfolio\thumbs\DP.png" />
@@ -360,6 +361,8 @@
     <Content Include="assets\vendor\circle-progress\circle-progress.min.js" />
     <Content Include="assets\vendor\fontawesome\css\font-awesome.min.css" />
     <Content Include="assets\vendor\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\vendor\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\vendor\fonts\Pe-icon-7-stroke.svg" />
     <Content Include="assets\vendor\goalprogress\goalProgress.css" />
     <Content Include="assets\vendor\goalprogress\goalProgress.js" />
     <Content Include="assets\vendor\goalprogress\goalProgress.min.js" />
@@ -454,6 +457,8 @@
     <Content Include="assets\vendor\rs-plugin\js\source\jquery.themepunch.tools.min.js" />
     <Content Include="assets\vendor\waypoints\waypoints.min.js" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Pe-icon-7-stroke.svg" />
     <Content Include="Global.asax" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -547,6 +552,27 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="assets\custom\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\custom\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\custom\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\custom\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\custom\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="assets\custom\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="assets\custom\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="assets\vendor\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\vendor\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\vendor\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\vendor\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\vendor\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="assets\vendor\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="assets\vendor\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="fonts\Pe-icon-7-stroke.woff" />
     <None Include="Properties\PublishProfiles\CibusMVC.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -609,6 +635,23 @@
     <Content Include="Views\Combo\pruebaList.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Checkout\Completado.cshtml" />
+    <Content Include="Views\Shared\_LayoutManager.cshtml" />
+    <Content Include="Views\AdministradorRestaurante\DetailsRestaurante.cshtml" />
+    <Content Include="Views\AdministradorRestaurante\CreateRestaurante.cshtml" />
+    <Content Include="Views\AdministradorRestaurante\EditRestaurante.cshtml" />
+    <Content Include="Views\AdministradorRestaurante\DeleteRestaurante.cshtml" />
+    <Content Include="Views\AdministradorRestaurante\Index.cshtml" />
+    <Content Include="Views\AdministradorUsuario\Create.cshtml" />
+    <Content Include="Views\AdministradorUsuario\Delete.cshtml" />
+    <Content Include="Views\AdministradorUsuario\Details.cshtml" />
+    <Content Include="Views\AdministradorUsuario\Edit.cshtml" />
+    <Content Include="Views\AdministradorUsuario\Index.cshtml" />
+    <Content Include="Views\Shared\SibarAdministrador.cshtml" />
+    <Content Include="Views\AdministradorComboRestaurantes\Create.cshtml" />
+    <Content Include="Views\AdministradorComboRestaurantes\Delete.cshtml" />
+    <Content Include="Views\AdministradorComboRestaurantes\Details.cshtml" />
+    <Content Include="Views\AdministradorComboRestaurantes\Edit.cshtml" />
+    <Content Include="Views\AdministradorComboRestaurantes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -618,9 +661,7 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Carrito\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

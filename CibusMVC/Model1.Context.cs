@@ -30,7 +30,6 @@ namespace CibusMVC
         public virtual DbSet<DetallePedido> DetallePedidos { get; set; }
         public virtual DbSet<Pedido> Pedidos { get; set; }
         public virtual DbSet<Restaurante> Restaurantes { get; set; }
-        public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
     }

@@ -6,7 +6,10 @@
             <a href="#"><img src="~/assets/custom/images/logo01.png" width="180" alt="logo"></a>
         </li>
         <li class="e-divider-4"></li>
-        <li><a href='@Url.Action("Index","Restaurantes")' class="current">Inicio</a></li>
+        <li><a href='@Url.Action("Index","Restaurantes")' class="current"><span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 18px"></span>- Inicio</a></li>
+
+        <li><a href='@Url.Action("Index","ShoppingCart")' class="current"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style="font-size: 18px"></span>- Pedido</a></li>
+
         @*<li><a href="#">Sobre Nosotros</a></li>*@
 
 
@@ -25,9 +28,11 @@
         </ul>
        
     </div>
-    <a href="@Url.Action("Index", "ShoppingCart")">
-    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+    <div class="text-right grid-item">
+        <a href="@Url.Action("Index", "ShoppingCart")">
+    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" style="font-size: 42px"></span>
     </a>
+    </div>
     <br />
 
 </div>

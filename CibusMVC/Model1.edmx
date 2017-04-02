@@ -34,7 +34,6 @@
           <Property Name="IdComboRestaurante" Type="int" Nullable="false" />
           <Property Name="IdPedido" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" />
-          <Property Name="IdSize" Type="int" Nullable="false" />
           <Property Name="PrecioUnitario" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Pedido">
@@ -55,13 +54,6 @@
           <Property Name="Telefono" Type="nchar" MaxLength="16" />
           <Property Name="Logo" Type="nchar" MaxLength="128" />
           <Property Name="Tipo" Type="char" MaxLength="8" />
-        </EntityType>
-        <EntityType Name="Size">
-          <Key>
-            <PropertyRef Name="IdSize" />
-          </Key>
-          <Property Name="IdSize" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -131,18 +123,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetallePedido_Size">
-          <End Role="Size" Type="Self.Size" Multiplicity="1" />
-          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Size">
-              <PropertyRef Name="IdSize" />
-            </Principal>
-            <Dependent Role="DetallePedido">
-              <PropertyRef Name="IdSize" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Restaurante">
           <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -161,7 +141,6 @@
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Restaurante" EntityType="Self.Restaurante" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_ComboRestaurante" Association="Self.FK_Cart_ComboRestaurante">
@@ -178,10 +157,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_DetallePedido_Pedido" Association="Self.FK_DetallePedido_Pedido">
             <End Role="Pedido" EntitySet="Pedido" />
-            <End Role="DetallePedido" EntitySet="DetallePedido" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetallePedido_Size" Association="Self.FK_DetallePedido_Size">
-            <End Role="Size" EntitySet="Size" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Restaurante" Association="Self.FK_Usuario_Restaurante">
@@ -226,18 +201,16 @@
           <Property Name="IdComboRestaurante" Type="Int32" Nullable="false" />
           <Property Name="IdPedido" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" />
-          <Property Name="IdSize" Type="Int32" Nullable="false" />
           <Property Name="PrecioUnitario" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="ComboRestaurante" Relationship="Self.FK_DetallePedido_ComboRestaurante" FromRole="DetallePedido" ToRole="ComboRestaurante" />
           <NavigationProperty Name="Pedido" Relationship="Self.FK_DetallePedido_Pedido" FromRole="DetallePedido" ToRole="Pedido" />
-          <NavigationProperty Name="Size" Relationship="Self.FK_DetallePedido_Size" FromRole="DetallePedido" ToRole="Size" />
         </EntityType>
         <EntityType Name="Pedido">
           <Key>
             <PropertyRef Name="IdPedido" />
           </Key>
           <Property Name="IdPedido" Type="Int32" Nullable="false" />
-          <Property Name="IdCliente" Type="String" Nullable="false" />
+          <Property Name="IdCliente" Type="String" Nullable="false" MaxLength="16" Unicode="true" FixedLength="true" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="DetallePedido" Relationship="Self.FK_DetallePedido_Pedido" FromRole="Pedido" ToRole="DetallePedido" />
@@ -253,14 +226,6 @@
           <Property Name="Tipo" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="ComboRestaurante" Relationship="Self.FK_ComboRestaurante_Restaurante" FromRole="Restaurante" ToRole="ComboRestaurante" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Restaurante" FromRole="Restaurante" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="Size">
-          <Key>
-            <PropertyRef Name="IdSize" />
-          </Key>
-          <Property Name="IdSize" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DetallePedido" Relationship="Self.FK_DetallePedido_Size" FromRole="Size" ToRole="DetallePedido" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -331,18 +296,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetallePedido_Size">
-          <End Role="Size" Type="Self.Size" Multiplicity="1" />
-          <End Role="DetallePedido" Type="Self.DetallePedido" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Size">
-              <PropertyRef Name="IdSize" />
-            </Principal>
-            <Dependent Role="DetallePedido">
-              <PropertyRef Name="IdSize" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Restaurante">
           <End Role="Restaurante" Type="Self.Restaurante" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -361,7 +314,6 @@
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" />
           <EntitySet Name="Restaurante" EntityType="Self.Restaurante" />
-          <EntitySet Name="Size" EntityType="Self.Size" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_Cart_ComboRestaurante" Association="Self.FK_Cart_ComboRestaurante">
@@ -378,10 +330,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_DetallePedido_Pedido" Association="Self.FK_DetallePedido_Pedido">
             <End Role="Pedido" EntitySet="Pedido" />
-            <End Role="DetallePedido" EntitySet="DetallePedido" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetallePedido_Size" Association="Self.FK_DetallePedido_Size">
-            <End Role="Size" EntitySet="Size" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Restaurante" Association="Self.FK_Usuario_Restaurante">
@@ -425,7 +373,6 @@
                 <ScalarProperty Name="IdComboRestaurante" ColumnName="IdComboRestaurante" />
                 <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="IdSize" ColumnName="IdSize" />
                 <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -448,14 +395,6 @@
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Size">
-            <EntityTypeMapping TypeName="CibusDB2Model.Size">
-              <MappingFragment StoreEntitySet="Size">
-                <ScalarProperty Name="IdSize" ColumnName="IdSize" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

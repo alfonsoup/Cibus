@@ -18,11 +18,9 @@ namespace CibusMVC
         public int IdComboRestaurante { get; set; }
         public int IdPedido { get; set; }
         public Nullable<int> Cantidad { get; set; }
-        public int IdSize { get; set; }
         public Nullable<decimal> PrecioUnitario { get; set; }
     
         public virtual ComboRestaurante ComboRestaurante { get; set; }
         public virtual Pedido Pedido { get; set; }
-        public virtual Size Size { get; set; }
     }
 }

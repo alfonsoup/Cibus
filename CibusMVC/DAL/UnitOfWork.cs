@@ -13,7 +13,7 @@ namespace CibusMVC.DAL
         private GenericRepository<ComboRestaurante> comboRestauranteRepository ;
         private GenericRepository<DetallePedido> detallePedidoRepository ;
         private GenericRepository<Pedido> pedidoRepository ;
-        private GenericRepository<Size> sizeRepository;
+       // private GenericRepository<Size> sizeRepository;
         private GenericRepository<Usuario> usuarioRepository;
 
         public GenericRepository<Restaurante> RestauranteRepository
@@ -60,17 +60,17 @@ namespace CibusMVC.DAL
                 return pedidoRepository;
             }
         }
-        public GenericRepository<Size> SizeRepository
-        {
-            get
-            {
-                if (this.sizeRepository == null)
-                {
-                    this.sizeRepository = new GenericRepository<Size>(context);
-                }
-                return sizeRepository;
-            }
-        }
+        //public GenericRepository<Size> SizeRepository
+        //{
+        //    get
+        //    {
+        //        if (this.sizeRepository == null)
+        //        {
+        //            this.sizeRepository = new GenericRepository<Size>(context);
+        //        }
+        //        return sizeRepository;
+        //    }
+        //}
 
         public GenericRepository<Usuario> UsuarioRepository
         {

@@ -10,14 +10,12 @@
         <EntityTypeShape EntityType="CibusDB2Model.DetallePedido" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CibusDB2Model.Pedido" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CibusDB2Model.Restaurante" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CibusDB2Model.Size" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CibusDB2Model.sysdiagrams" Width="1.5" PointX="8.75" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CibusDB2Model.Usuario" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="CibusDB2Model.FK_Cart_ComboRestaurante" ManuallyRouted="false" />
         <AssociationConnector Association="CibusDB2Model.FK_ComboRestaurante_Restaurante" ManuallyRouted="false" />
         <AssociationConnector Association="CibusDB2Model.FK_DetallePedido_ComboRestaurante" ManuallyRouted="false" />
         <AssociationConnector Association="CibusDB2Model.FK_DetallePedido_Pedido" ManuallyRouted="false" />
-        <AssociationConnector Association="CibusDB2Model.FK_DetallePedido_Size" ManuallyRouted="false" />
         <AssociationConnector Association="CibusDB2Model.FK_Usuario_Restaurante" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
