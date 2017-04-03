@@ -1,4 +1,8 @@
-﻿@model IEnumerable<CibusMVC.DetallePedido>
+﻿@*@model IEnumerable<CibusMVC.DetallePedido>*@
+
+@using CibusMVC.ViewModels;
+@model CibusMVC.ViewModels.DetallePedidoViewModel
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMenu.cshtml";
@@ -10,22 +14,26 @@
 <section id="blog" class="padding-side-50">
     <div class="e-divider-8"></div>
     <div class="e-divider-4"></div>
+    
+    
+    
     <div class="grid container-fluid e-text-center">
-       
-        
         <div id="posts" class="row popup-container">
+            @foreach (var pedido in Model.PedidosAll)
+            {
+
             <table class="table">
-    <tr>
-        <td>Cliente</td>
-        <td>Fecha</td>
-        <td>Total</td>
-    </tr>
-            <tr>
-                <td>@Html.DisplayFor(modelItem => Model.Cast<DetallePedido>().First().Pedido.IdCliente)</td>
-                <td>@Html.DisplayFor(modelItem => Model.Cast<DetallePedido>().First().Pedido.Fecha)</td>
-                <td>@Html.DisplayFor(modelItem => Model.Cast<DetallePedido>().First().Pedido.Total)</td>
-            </tr>
-</table>
+                <tr>
+                    <td>Cliente</td>
+                    <td>Fecha</td>
+                    <td>Total</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => pedido.IdCliente)</td>
+                    <td>@Html.DisplayFor(modelItem => pedido.Fecha)</td>
+                    <td>@Html.DisplayFor(modelItem => pedido.Total)</td>
+                </tr>
+            </table>
 
             <table class="table">
                 <tr>
@@ -38,29 +46,30 @@
 
                 </tr>
 
-                @foreach (var item in Model)
+                @foreach (var detalle in Model.DetallesPedidosAll)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ComboRestaurante.Restaurante.Nombre)
+                            @Html.DisplayFor(modelItem => detalle.ComboRestaurante.Restaurante.Nombre)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ComboRestaurante.Nombre)
+                            @Html.DisplayFor(modelItem => detalle.ComboRestaurante.Nombre)
                         </td>
-                        <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Size.Descripcion)
-                        </td>*@
+                        <td>@Html.DisplayFor(modelItem => detalle.Cantidad)</td>
+                     
                         <td>
-                            @Html.DisplayFor(modelItem => item.ComboRestaurante.Precio)
+                            @Html.DisplayFor(modelItem => detalle.ComboRestaurante.Precio)
                         </td>
-                        <td>@(item.Cantidad * item.ComboRestaurante.Precio)</td>
+                        <td>@(detalle.Cantidad * detalle.ComboRestaurante.Precio)</td>
                      
                     </tr>
                 }
 
             </table>
             <h3> <button>Confirmar</button></h3>
+            }
+
+
         </div>
     </div>
 

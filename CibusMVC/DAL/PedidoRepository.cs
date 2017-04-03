@@ -19,6 +19,14 @@ namespace CibusMVC.DAL
         {
             return context.Pedidos.ToList();
         }
+        public IEnumerable<Pedido> GetTodosPedidosByIdPedido(int idPedido)
+        {
+            var pedidos = from b in context.Pedidos
+                          where b.IdPedido.Equals(idPedido)
+                          select b;
+
+            return pedidos;
+        }
 
         public Pedido GetPedidoByID(int id)
         {

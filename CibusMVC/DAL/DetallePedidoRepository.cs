@@ -25,6 +25,14 @@ namespace CibusMVC.DAL
         {
             return context.DetallePedidos.Find(id);
         }
+        public IEnumerable<DetallePedido> GetTodosDetallesPedidosByIdPedido(int idPedido)
+        {
+            var pedidos = from b in context.DetallePedidos
+                       where b.IdPedido.Equals(idPedido)
+                       select b;
+
+            return pedidos;
+        }
 
         public void InsertDetallePedido(DetallePedido detallePedido)
         {
