@@ -8,6 +8,7 @@ namespace CibusMVC.DAL
     public interface IPedidoRepository : IDisposable
     {
         IEnumerable<Pedido> GetPedidos();
+        IEnumerable<Pedido> GetTodosPedidosByIdPedido(int idPedido);
         Pedido GetPedidoByID(int pedidoId);
         void InsertPedido(Pedido pedido);
         void DeletePedido(int pedidoID);

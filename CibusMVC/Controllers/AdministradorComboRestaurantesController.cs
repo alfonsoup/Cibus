@@ -10,6 +10,8 @@ using CibusMVC;
 
 namespace CibusMVC.Controllers
 {
+
+    [Authorize]
     public class AdministradorComboRestaurantesController : Controller
     {
         private CibusDB2Entities db = new CibusDB2Entities();

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1b685eaf68a94ca9b74a5e07a6f996a2" Name="Diagram1">
+      <Diagram DiagramId="1b685eaf68a94ca9b74a5e07a6f996a2" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="CibusDB2Model.Cart" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CibusDB2Model.ComboRestaurante" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CibusDB2Model.DetallePedido" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
@@ -17,6 +17,13 @@
         <AssociationConnector Association="CibusDB2Model.FK_DetallePedido_ComboRestaurante" ManuallyRouted="false" />
         <AssociationConnector Association="CibusDB2Model.FK_DetallePedido_Pedido" ManuallyRouted="false" />
         <AssociationConnector Association="CibusDB2Model.FK_Usuario_Restaurante" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CibusDB2Model.AspNetRoles" Width="1.5" PointX="10.375" PointY="2.5" />
+        <EntityTypeShape EntityType="CibusDB2Model.AspNetUserClaims" Width="1.5" PointX="14.875" PointY="1" />
+        <EntityTypeShape EntityType="CibusDB2Model.AspNetUserLogins" Width="1.5" PointX="14.875" PointY="3.75" />
+        <EntityTypeShape EntityType="CibusDB2Model.AspNetUsers" Width="1.5" PointX="12.625" PointY="1.375" />
+        <AssociationConnector Association="CibusDB2Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CibusDB2Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="CibusDB2Model.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

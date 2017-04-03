@@ -9,11 +9,13 @@
 
 namespace CibusMVC
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class CibusDB2Entities : DbContext
+
+    public partial class CibusDB2Entities : IdentityDbContext<ApplicationUser>
     {
         public CibusDB2Entities()
             : base("name=CibusDB2Entities")
@@ -24,7 +26,12 @@ namespace CibusMVC
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        public static CibusDB2Entities Create()
+        {
+            return new CibusDB2Entities();
+        }
+
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<ComboRestaurante> ComboRestaurantes { get; set; }
         public virtual DbSet<DetallePedido> DetallePedidos { get; set; }
@@ -32,5 +39,9 @@ namespace CibusMVC
         public virtual DbSet<Restaurante> Restaurantes { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

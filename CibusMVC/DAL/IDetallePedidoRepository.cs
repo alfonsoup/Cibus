@@ -12,6 +12,7 @@ namespace CibusMVC.DAL
         void InsertDetallePedido(DetallePedido detallePedido);
         void DeleteDetallePedido(int detallePedidoID);
         void UpdateDetallePedido(DetallePedido detallePedido);
+        IEnumerable<DetallePedido> GetTodosDetallesPedidosByIdPedido(int idPedido);
         void Save();
     }
 }
